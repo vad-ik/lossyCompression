@@ -131,17 +131,25 @@ int[][] getShiftMatrix(int[][] matrix, int shift,boolean side) {
         return result;
     }
 
-    int[] zigzag(int[][] matrix) {
+    void zigzag(int[][] matrix,int[] result,boolean side) {
         int maxWidth = matrix.length;
         int maxHeight = matrix[0].length;
-        int[] result = new int[maxWidth * maxHeight];
-        result[maxWidth * maxHeight - 1] = matrix[maxWidth - 1][maxHeight - 1];
+        if (side) {
+            result[maxWidth * maxHeight - 1] = matrix[maxWidth - 1][maxHeight - 1];
+        }else {
+             matrix[maxWidth - 1][maxHeight - 1]=result[maxWidth * maxHeight - 1];
+
+        }
         int x = 0;
         int y = 0;
         int n = 0;
         boolean up = true;
         while (!(x == maxWidth - 1 && y == maxHeight - 1)) {
-            result[n] = matrix[x][y];
+            if (side) {
+                result[n] = matrix[x][y];
+            }else {
+                  matrix[y][x]=result[n];
+            }
             n++;
             if (up) {
                 if (y > 0 || x == maxWidth - 1) {
@@ -172,8 +180,9 @@ int[][] getShiftMatrix(int[][] matrix, int shift,boolean side) {
             }
 
         }
-        return result;
     }
+
+
 
     int[][] downsamplingDelLine(int[][] matrix, int step) {
         int[][] result = new int[(matrix.length / step)][(matrix[0].length / step)];

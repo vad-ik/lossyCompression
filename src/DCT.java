@@ -15,6 +15,7 @@ public class DCT {
                 for (int k = 0; k < 8; k++) {
                     for (int l = 0; l < 8; l++) {
                         result[i][j][k][l] = (matrix[i * 8 + k][j * 8 + l] >> shift) & 255;
+                        result[i][j][k][l]-=127;
                     }
                 }
             }
@@ -161,7 +162,9 @@ public class DCT {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 result[i][j] = (int) ((q_matrix[i][j] * scale) + 50) / 100;
-
+if (result[i][j]==0){
+result[i][j]=1;
+}
             }
         }
         return result;
@@ -201,7 +204,7 @@ public class DCT {
                     for (int l = 0; l < 8; l++) {
 
                         result[i * 8 + k][j * 8 + l] = result8x8[i][j][k][l] & 255;
-
+                        result[i * 8 + k][j * 8 + l] +=127;
                     }
                 }
 
