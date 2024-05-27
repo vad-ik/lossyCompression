@@ -15,7 +15,7 @@ public class DCT {
                 for (int k = 0; k < 8; k++) {
                     for (int l = 0; l < 8; l++) {
                         result[i][j][k][l] = (matrix[i * 8 + k][j * 8 + l] >> shift) & 255;
-                        result[i][j][k][l]-=127;
+                        //   result[i][j][k][l]-=127;
                     }
                 }
             }
@@ -27,7 +27,6 @@ public class DCT {
     private int[][] multiply(double[][] a, int[][] b, double[][] c) {
         int[][] result = new int[a.length][b[0].length];
         double[][] tmpMatr = new double[a.length][b[0].length];
-
 
 
         for (int i = 0; i < a.length; i++) {
@@ -87,13 +86,14 @@ public class DCT {
     private int[][] getDCT(int[][] a, boolean quantization, int len) {
         if (quantization) {
             int[][] dCT = multiply(T, a, T1);
-           // check(dCT);
+            // check(dCT);
             return getQuantization(dCT, len);
         } else {
             return multiply(T, a, T1);
         }
     }
-//void check(int[][] dCT){
+
+    //void check(int[][] dCT){
 //    for (int i = 0; i < 8; i++) {
 //        for (int j = 0; j < 8; j++) {
 //            if(dCT[i][j]>1023){
@@ -162,9 +162,9 @@ public class DCT {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 result[i][j] = (int) ((q_matrix[i][j] * scale) + 50) / 100;
-if (result[i][j]==0){
-result[i][j]=1;
-}
+                if (result[i][j] == 0) {
+                    result[i][j] = 1;
+                }
             }
         }
         return result;
@@ -204,7 +204,7 @@ result[i][j]=1;
                     for (int l = 0; l < 8; l++) {
 
                         result[i * 8 + k][j * 8 + l] = result8x8[i][j][k][l] & 255;
-                        result[i * 8 + k][j * 8 + l] +=127;
+                    //    result[i * 8 + k][j * 8 + l] += 127;
                     }
                 }
 
@@ -217,10 +217,10 @@ result[i][j]=1;
     }
 
     private double[][] inversion(double[][] A1) {
-        double[][] A=new double[8][8];
+        double[][] A = new double[8][8];
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j <8 ; j++) {
-                A[i][j]=A1[i][j];
+            for (int j = 0; j < 8; j++) {
+                A[i][j] = A1[i][j];
             }
         }
         int N = 8;
@@ -233,8 +233,9 @@ result[i][j]=1;
             for (int j = 0; j < N; j++) {
                 E[i][j] = 0.0;
 
-                if (i == j){
-                    E[i][j] = 1.0;}
+                if (i == j) {
+                    E[i][j] = 1.0;
+                }
             }
 
         for (int k = 0; k < N; k++) {
@@ -274,19 +275,19 @@ result[i][j]=1;
     }
 
 
-    static void sayArray(double[][] a){
+    static void sayArray(double[][] a) {
         for (int i = 0; i < a.length; i++) {
             for (int i1 = 0; i1 < a[0].length; i1++) {
-                System.out.print(a[i][i1]+" ");
+                System.out.print(a[i][i1] + " ");
             }
             System.out.println();
         }
     }
 
-    static void sayArray(int[][] a){
+    static void sayArray(int[][] a) {
         for (int i = 0; i < a.length; i++) {
             for (int i1 = 0; i1 < a[0].length; i1++) {
-                System.out.print(a[i][i1]+" ");
+                System.out.print(a[i][i1] + " ");
             }
             System.out.println();
         }

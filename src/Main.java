@@ -1,25 +1,26 @@
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
 
-    static boolean save = true;
+    static boolean save = false;
 
     public static void main(String[] args) {
 
 
         FileKeeper fileKeeper = new FileKeeper();
         PhotoWorker worker = new PhotoWorker();
-        String str = "E:\\загрузки\\1200px-Lenna — копия.png";
-        //int[][] a=worker.getMatrixPhoto(str);
+        // String str = "E:\\загрузки\\1200px-Lenna — копия.png";
+         String str = "E:\\загрузки\\1200px-Lenna.png";
+
 
         int[][] in = worker.getMatrixPhoto(str);//получить матрицу фото
         if (false){//рандомная картинка
             Random random = new Random();
             for (int i = 0; i < in.length; i++) {
                 for (int i1 = 0; i1 < in[0].length; i1++) {
-                    int a=random.nextInt()&255;
+                    int a=255;
                     int r=random.nextInt()&255;
                     int g=random.nextInt()&255;
                     int b=random.nextInt()&255;
@@ -61,10 +62,9 @@ public class Main {
         if (save) {
             fileKeeper.savePhoto(y, c1F, c2F, "imageYcbcr2.txt");
         }
-        // for (int b = 1; b < 100; b+=1) {
+         for (int b = 1; b < 100; b+=1) {
         boolean qwant = true;
-        int b = 50;
-        {
+       // int b = 1; {
 
 
             DCT dct = new DCT();
@@ -92,7 +92,7 @@ public class Main {
             //  if (save) {
             fileKeeper.savePhotoQ(acY, acC, "photoQRle" + b + ".txt", in.length, in[0].length, b);
             b = fileKeeper.getPhotoQ(acY, acC, "photoQRle" + b + ".txt");
-            // }
+           //  }
 
 
             Rle.getBackDcAc(acC, acY, zigzagY, zigzagCb, zigzagCr);
@@ -174,12 +174,13 @@ public class Main {
     static void addAll(int[][] matrix, int n) {
         for (int i = 0; i < matrix.length; i++) {
             for (int i1 = 0; i1 < matrix[0].length; i1++) {
-
                 matrix[i][i1] += n;
-
             }
         }
     }
+
+
+
 
 
 }

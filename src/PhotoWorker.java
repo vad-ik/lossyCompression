@@ -210,8 +210,8 @@ int[][] getShiftMatrix(int[][] matrix, int shift,boolean side) {
             for (int j = 0; j < matrix[0].length; j += step) {
                 int[] color = new int[4];//поиск среднего
                 int amaunt = 0;
-                for (int k = 0; k < 3 && (i + k) < matrix.length; k++) {
-                    for (int l = 0; l < 3 && (j + l) < matrix[0].length; l++) {
+                for (int k = 0; k < step && (i + k) < matrix.length; k++) {
+                    for (int l = 0; l < step && (j + l) < matrix[0].length; l++) {
                         amaunt++;
                         color[0] += ((matrix[i + k][j + l] >> (24)) & (255));
                         color[1] += ((matrix[i + k][j + l] >> (16)) & (255));
@@ -230,8 +230,8 @@ int[][] getShiftMatrix(int[][] matrix, int shift,boolean side) {
                             Math.abs(color[1] - ((matrix[i][j] >> (16)) & (255))) +
                             Math.abs(color[2] - ((matrix[i][j] >> (8)) & (255))) +
                             Math.abs(color[3] - ((matrix[i][j]) & (255)));
-                    for (int k = 0; k < 3 && i + k < matrix.length; k++) {
-                        for (int l = 0; l < 3 && j + l < matrix[0].length; l++) {
+                    for (int k = 0; k < step && i + k < matrix.length; k++) {
+                        for (int l = 0; l < step && j + l < matrix[0].length; l++) {
                             int thisLen = Math.abs(color[0] - ((matrix[i + k][j + l] >> (24)) & (255))) +
                                     Math.abs(color[1] - ((matrix[i + k][j + l] >> (16)) & (255))) +
                                     Math.abs(color[2] - ((matrix[i + k][j + l] >> (8)) & (255))) +
